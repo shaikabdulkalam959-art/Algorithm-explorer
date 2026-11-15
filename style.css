@@ -1,0 +1,190 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f4f6fb;
+  color: #222;
+  line-height: 1.6;
+}
+
+header {
+  background: #1e3a8a;
+  color: white;
+  padding: 35px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+main {
+  max-width: 950px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+  color: #1e3a8a;
+  margin-bottom: 12px;
+}
+
+h3 {
+  margin: 20px 0 10px;
+}
+
+p {
+  margin-bottom: 10px;
+}
+
+form {
+  display: grid;
+  gap: 15px;
+  margin-bottom: 15px;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #bbb;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.primary-btn {
+  background: #1e3a8a;
+  color: white;
+}
+
+.primary-btn:hover {
+  background: #172d6b;
+}
+
+.danger-btn {
+  background: #dc2626;
+  color: white;
+  margin-top: 15px;
+}
+
+.error {
+  color: #b91c1c;
+  font-weight: bold;
+  min-height: 20px;
+}
+
+.available-time {
+  margin: 20px 0;
+}
+
+.task-item {
+  background: #eef2ff;
+  border-left: 5px solid #1e3a8a;
+  padding: 10px 15px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab-btn {
+  background: #e5e7eb;
+  color: #111;
+}
+
+.tab-btn.active {
+  background: #1e3a8a;
+  color: white;
+}
+
+.result-box {
+  background: #f9fafb;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 18px;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.schedule-table th,
+.schedule-table td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: center;
+}
+
+.schedule-table th {
+  background: #1e3a8a;
+  color: white;
+}
+
+.late {
+  color: #b91c1c;
+  font-weight: bold;
+}
+
+.success {
+  color: #15803d;
+  font-weight: bold;
+}
+
+.complexity {
+  background: #ecfdf5;
+  border-left: 5px solid #10b981;
+  padding: 10px 15px;
+  margin: 15px 0;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #555;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    width: 100%;
+  }
+
+  header h1 {
+    font-size: 23px;
+  }
+}

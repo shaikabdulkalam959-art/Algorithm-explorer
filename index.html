@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Explorer | Task Scheduler</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>Algorithm Explorer: Task Scheduler</h1>
+    <p>Solve a real-world scheduling problem using four algorithmic approaches.</p>
+  </header>
+
+  <main>
+
+    <section class="card">
+      <h2>The Problem</h2>
+      <p>
+        Students, employees, and event organizers need to complete tasks before their deadlines.
+        Each task takes a certain amount of time, and only one task can be done at a time.
+      </p>
+      <p>
+        The app takes task names, durations, and deadlines, then creates a schedule.
+        It calculates the completion time and lateness of every task.
+      </p>
+      <p>
+        <strong>Goal:</strong> Schedule all tasks without overlap and minimize the total lateness.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Enter Your Tasks</h2>
+
+      <form id="task-form">
+        <div class="form-row">
+          <label for="task-name">Task name</label>
+          <input type="text" id="task-name" placeholder="Example: Study Maths">
+        </div>
+
+        <div class="form-row">
+          <label for="task-duration">Duration (hours)</label>
+          <input type="number" id="task-duration" min="1" placeholder="Example: 2">
+        </div>
+
+        <div class="form-row">
+          <label for="task-deadline">Deadline (hour)</label>
+          <input type="number" id="task-deadline" min="1" placeholder="Example: 5">
+        </div>
+
+        <button type="submit" class="primary-btn">Add Task</button>
+      </form>
+
+      <p id="error-message" class="error"></p>
+
+      <div class="available-time">
+        <label for="available-hours">Total available working hours</label>
+        <input type="number" id="available-hours" min="1" value="10">
+      </div>
+
+      <h3>Added Tasks</h3>
+      <div id="task-list"></div>
+
+      <button id="clear-tasks" class="danger-btn">Clear All Tasks</button>
+    </section>
+
+    <section class="card">
+      <h2>Choose an Algorithm</h2>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-algorithm="bruteForce">Brute Force</button>
+        <button class="tab-btn" data-algorithm="greedy">Greedy</button>
+        <button class="tab-btn" data-algorithm="dynamic">Dynamic Programming</button>
+        <button class="tab-btn" data-algorithm="backtracking">Backtracking</button>
+      </div>
+
+      <div id="algorithm-output"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Algorithm Explorer — Group Project</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
