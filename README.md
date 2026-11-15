@@ -15,21 +15,25 @@ https://your-site-name.netlify.app
 
 Add your GitHub repository link here after uploading the project.
 
-## Problem Statement
+## Problem
 
-Given a set of tasks, each with a duration and deadline, arrange the tasks in
-one-at-a-time order within a limited number of available working hours. The
-schedule should avoid overlapping tasks and aim to minimize the total lateness
-(the sum of how late completed tasks are past their deadlines).
+People often need to complete multiple tasks before deadlines.
+For example, a student may need to study, submit an assignment, and prepare
+a presentation. Each task takes time, and only one task can be done at a time.
 
-## Why It Matters
+This website helps users create a schedule that avoids overlapping tasks and
+reduces total lateness.
 
-Planning tasks is a common challenge for students, employees, and event
-organizers who have limited time and multiple deadlines. Comparing scheduling
-strategies helps people understand how to prioritize work, while demonstrating
-that a fast, simple rule may not always find the best schedule. This project
-also makes algorithm concepts concrete by showing how different approaches
-trade off solution quality, execution time, and memory use.
+## Why It Matters in Real Life
+
+In daily life, people often have more tasks than time available. Students,
+workers, and managers must decide what to do first when several tasks have
+different deadlines. A good schedule can reduce stress, help meet deadlines,
+and use time more effectively.
+
+This project shows why scheduling matters: even a small change in task order
+can make a big difference in whether tasks are completed on time. It also helps
+visualize how different algorithms handle the same real-world problem.
 
 ## What the Program Computes
 
@@ -40,14 +44,13 @@ The user enters:
 - Task deadline in hours
 - Total available working hours
 
-For the selected algorithm, the website computes and displays:
+The website calculates:
 
 - The order in which tasks should be completed
 - Start time and finish time for each task
-- Lateness for each task (zero when completed by its deadline)
-- Total lateness across the schedule
-- Whether the scheduled tasks fit within the available time
-- The algorithm's time and space complexity, along with a brief explanation
+- Lateness for each task
+- Total lateness
+- Whether all tasks fit within the available time
 
 ## Algorithms Used
 
