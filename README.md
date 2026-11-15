@@ -15,14 +15,21 @@ https://your-site-name.netlify.app
 
 Add your GitHub repository link here after uploading the project.
 
-## Problem
+## Problem Statement
 
-People often need to complete multiple tasks before deadlines.
-For example, a student may need to study, submit an assignment, and prepare
-a presentation. Each task takes time, and only one task can be done at a time.
+Given a set of tasks, each with a duration and deadline, arrange the tasks in
+one-at-a-time order within a limited number of available working hours. The
+schedule should avoid overlapping tasks and aim to minimize the total lateness
+(the sum of how late completed tasks are past their deadlines).
 
-This website helps users create a schedule that avoids overlapping tasks and
-reduces total lateness.
+## Why It Matters
+
+Planning tasks is a common challenge for students, employees, and event
+organizers who have limited time and multiple deadlines. Comparing scheduling
+strategies helps people understand how to prioritize work, while demonstrating
+that a fast, simple rule may not always find the best schedule. This project
+also makes algorithm concepts concrete by showing how different approaches
+trade off solution quality, execution time, and memory use.
 
 ## What the Program Computes
 
@@ -33,13 +40,14 @@ The user enters:
 - Task deadline in hours
 - Total available working hours
 
-The website calculates:
+For the selected algorithm, the website computes and displays:
 
 - The order in which tasks should be completed
 - Start time and finish time for each task
-- Lateness for each task
-- Total lateness
-- Whether all tasks fit within the available time
+- Lateness for each task (zero when completed by its deadline)
+- Total lateness across the schedule
+- Whether the scheduled tasks fit within the available time
+- The algorithm's time and space complexity, along with a brief explanation
 
 ## Algorithms Used
 

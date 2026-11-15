@@ -16,18 +16,45 @@
   <main>
 
     <section class="card">
-      <h2>The Problem</h2>
+      <h2>Problem Statement</h2>
       <p>
-        Students, employees, and event organizers need to complete tasks before their deadlines.
-        Each task takes a certain amount of time, and only one task can be done at a time.
+        Given a set of tasks, each with a duration and deadline, arrange the tasks
+        in order when only one task can be done at a time and working hours are limited.
       </p>
       <p>
-        The app takes task names, durations, and deadlines, then creates a schedule.
-        It calculates the completion time and lateness of every task.
+        The goal is to create a schedule that fits the available time and minimizes
+        total lateness—the sum of how late tasks finish past their deadlines.
+      </p>
+    </section>
+
+    <section class="card">
+      <h2>Why It Matters</h2>
+      <p>
+        Students, employees, and event organizers often have more work than time
+        and need to decide what to do first. A good schedule helps make deadlines
+        visible and use limited working hours more thoughtfully.
       </p>
       <p>
-        <strong>Goal:</strong> Schedule all tasks without overlap and minimize the total lateness.
+        Comparing these algorithms shows that a quick scheduling rule can be useful,
+        but may not find the best order. It also makes the trade-offs between solution
+        quality, running time, and memory easier to understand.
       </p>
+    </section>
+
+    <section class="card">
+      <h2>What the Program Computes</h2>
+      <p>
+        Enter each task's name, duration, and deadline, along with the total available
+        working hours. Choose an algorithm to calculate and compare a task schedule.
+      </p>
+      <ul>
+        <li>The order in which tasks should be completed</li>
+        <li>Each task's start time and finish time</li>
+        <li>How late each task finishes (zero if it meets its deadline)</li>
+        <li>Total lateness across the schedule</li>
+        <li>Whether all scheduled tasks fit within the available hours</li>
+        <li>A short explanation and time and space complexity for the selected algorithm</li>
+      </ul>
     </section>
 
     <section class="card">
