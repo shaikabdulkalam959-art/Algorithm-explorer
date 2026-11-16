@@ -88,6 +88,17 @@ tries another option.
 - Time complexity: Exponential in the worst case
 - Space complexity: O(n)
 
+### 5. Divide and Conquer
+
+Divide and conquer sorts the bookings by end time.
+It divides the problem into smaller parts and uses binary search to find
+the latest booking that ends before the current booking starts.
+
+It compares the value of accepting the current booking with rejecting it.
+It then combines the best results to find the highest total value.
+
+- Time complexity: O(n log n)
+- Space complexity: O(n)
 ## How to Run Locally
 
 1. Download or clone this repository.
