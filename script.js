@@ -505,8 +505,8 @@ function runAlgorithm(algorithm) {
       interleavings. It evaluates each complete schedule and keeps the one with
       the lowest total lateness.
       `,
-      "O(n × n!)",
-      "O(n × n!)",
+      "O(n logn)",
+      "O(n)",
       result
     );
   }
