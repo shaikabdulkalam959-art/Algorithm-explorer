@@ -280,92 +280,71 @@ function dynamicProgramming(inputTasks) {
 
   return evaluateSchedule(finalState.order);
 }
-// 5. Divide and Conquer
-function divideAndConquer(inputBookings) {
-  const sortedBookings = [...inputBookings].sort(function (a, b) {
-    return a.end - b.end;
-  });
 
-  const n = sortedBookings.length;
+// 4. Divide and Conquer: recursively split tasks, then combine every
+// possible interleaving of each half's orders and keep the least-late schedule.
+function divideAndConquer(inputTasks) {
+  function generateOrders(items) {
+    if (items.length <= 1) {
+      return [items];
+    }
 
-  // Stores the best total value for the first i bookings
-  const bestValue = new Array(n + 1).fill(0);
+    const middle = Math.floor(items.length / 2);
+    const leftOrders = generateOrders(items.slice(0, middle));
+    const rightOrders = generateOrders(items.slice(middle));
+    const combinedOrders = [];
 
-  // Stores whether each booking was selected in the best solution
-  const selected = new Array(n + 1).fill(false);
+    function interleave(left, right, leftIndex, rightIndex, order) {
+      if (leftIndex === left.length && rightIndex === right.length) {
+        combinedOrders.push(order);
+        return;
+      }
 
-  // Find the latest booking that ends before the current booking starts
-  function findPreviousBooking(index) {
-    const currentBooking = sortedBookings[index];
-    let low = 0;
-    let high = index - 1;
-    let answer = -1;
+      if (leftIndex < left.length) {
+        interleave(
+          left,
+          right,
+          leftIndex + 1,
+          rightIndex,
+          [...order, left[leftIndex]]
+        );
+      }
 
-    while (low <= high) {
-      const middle = Math.floor((low + high) / 2);
-
-      if (sortedBookings[middle].end <= currentBooking.start) {
-        answer = middle;
-        low = middle + 1;
-      } else {
-        high = middle - 1;
+      if (rightIndex < right.length) {
+        interleave(
+          left,
+          right,
+          leftIndex,
+          rightIndex + 1,
+          [...order, right[rightIndex]]
+        );
       }
     }
 
-    return answer;
+    leftOrders.forEach(function (leftOrder) {
+      rightOrders.forEach(function (rightOrder) {
+        interleave(leftOrder, rightOrder, 0, 0, []);
+      });
+    });
+
+    return combinedOrders;
   }
 
-  // Calculate best value using divide and conquer
-  function solve(index) {
-    if (index < 0) {
-      return 0;
+  const candidateOrders = generateOrders(inputTasks);
+  let bestResult = null;
+
+  candidateOrders.forEach(function (order) {
+    const result = evaluateSchedule(order);
+
+    if (!bestResult || result.totalLateness < bestResult.totalLateness) {
+      bestResult = result;
     }
+  });
 
-    if (bestValue[index + 1] !== 0) {
-      return bestValue[index + 1];
-    }
-
-    const currentBooking = sortedBookings[index];
-    const previousIndex = findPreviousBooking(index);
-
-    const valueIfSelected =
-      currentBooking.value + solve(previousIndex);
-
-    const valueIfRejected = solve(index - 1);
-
-    if (valueIfSelected > valueIfRejected) {
-      bestValue[index + 1] = valueIfSelected;
-      selected[index + 1] = true;
-    } else {
-      bestValue[index + 1] = valueIfRejected;
-      selected[index + 1] = false;
-    }
-
-    return bestValue[index + 1];
-  }
-
-  solve(n - 1);
-
-  // Trace backwards to find accepted bookings
-  const acceptedBookings = [];
-  let index = n - 1;
-
-  while (index >= 0) {
-    if (selected[index + 1]) {
-      acceptedBookings.unshift(sortedBookings[index]);
-      index = findPreviousBooking(index);
-    } else {
-      index = index - 1;
-    }
-  }
-
-  return {
-    selectedBookings: acceptedBookings,
-    totalValue: calculateTotalValue(acceptedBookings)
-  };
+  return bestResult;
 }
 
-// 4. Backtracking: build schedules step by step
+// 5. Backtracking: build schedules step by step
 function backtracking(inputTasks) {
   let bestResult = null;
   const availableHours = Number(availableHoursInput.value);
@@ -441,7 +420,7 @@ function runAlgorithm(algorithm) {
     algorithmOutput.innerHTML = `
       <div class="result-box">
         <p class="late">
-          Brute force and backtracking become very slow after 8 tasks.
+          Brute force, divide and conquer, and backtracking become very slow after 8 tasks.
           Please use 8 tasks or fewer for this demonstration.
         </p>
       </div>
@@ -462,7 +441,7 @@ function runAlgorithm(algorithm) {
       Finally, it chooses the order with the lowest total lateness.
       `,
       "O(n!)",
-      "O(n)",
+      "O(n × n!)",
       result
     );
   }
@@ -514,23 +493,23 @@ function runAlgorithm(algorithm) {
       result
     );
   }
-  if (algorithm === "divideConquer") {
-  result = divideAndConquer(bookings);
 
-  showResult(
-    "Divide and Conquer Result",
-    `
-    Divide and conquer first sorts the bookings by end time.
-    It divides the problem into smaller parts and uses binary search to find
-    the latest booking that ends before the current booking starts.
-    It then compares the value of accepting the current booking with rejecting it.
-    Finally, it combines the best results to find the highest total value.
-    `,
-    "O(n log n)",
-    "O(n)",
-    result
-  );
-}
+  if (algorithm === "divideConquer") {
+    result = divideAndConquer(tasks);
+
+    showResult(
+      "Divide and Conquer Result",
+      `
+      Divide and conquer splits the tasks into two groups, recursively generates
+      possible orders for each group, and combines them using all possible
+      interleavings. It evaluates each complete schedule and keeps the one with
+      the lowest total lateness.
+      `,
+      "O(n × n!)",
+      "O(n × n!)",
+      result
+    );
+  }
 }
 
 // Show initial message
