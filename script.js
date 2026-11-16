@@ -280,6 +280,90 @@ function dynamicProgramming(inputTasks) {
 
   return evaluateSchedule(finalState.order);
 }
+// 5. Divide and Conquer
+function divideAndConquer(inputBookings) {
+  const sortedBookings = [...inputBookings].sort(function (a, b) {
+    return a.end - b.end;
+  });
+
+  const n = sortedBookings.length;
+
+  // Stores the best total value for the first i bookings
+  const bestValue = new Array(n + 1).fill(0);
+
+  // Stores whether each booking was selected in the best solution
+  const selected = new Array(n + 1).fill(false);
+
+  // Find the latest booking that ends before the current booking starts
+  function findPreviousBooking(index) {
+    const currentBooking = sortedBookings[index];
+    let low = 0;
+    let high = index - 1;
+    let answer = -1;
+
+    while (low <= high) {
+      const middle = Math.floor((low + high) / 2);
+
+      if (sortedBookings[middle].end <= currentBooking.start) {
+        answer = middle;
+        low = middle + 1;
+      } else {
+        high = middle - 1;
+      }
+    }
+
+    return answer;
+  }
+
+  // Calculate best value using divide and conquer
+  function solve(index) {
+    if (index < 0) {
+      return 0;
+    }
+
+    if (bestValue[index + 1] !== 0) {
+      return bestValue[index + 1];
+    }
+
+    const currentBooking = sortedBookings[index];
+    const previousIndex = findPreviousBooking(index);
+
+    const valueIfSelected =
+      currentBooking.value + solve(previousIndex);
+
+    const valueIfRejected = solve(index - 1);
+
+    if (valueIfSelected > valueIfRejected) {
+      bestValue[index + 1] = valueIfSelected;
+      selected[index + 1] = true;
+    } else {
+      bestValue[index + 1] = valueIfRejected;
+      selected[index + 1] = false;
+    }
+
+    return bestValue[index + 1];
+  }
+
+  solve(n - 1);
+
+  // Trace backwards to find accepted bookings
+  const acceptedBookings = [];
+  let index = n - 1;
+
+  while (index >= 0) {
+    if (selected[index + 1]) {
+      acceptedBookings.unshift(sortedBookings[index]);
+      index = findPreviousBooking(index);
+    } else {
+      index = index - 1;
+    }
+  }
+
+  return {
+    selectedBookings: acceptedBookings,
+    totalValue: calculateTotalValue(acceptedBookings)
+  };
+}
 
 // 4. Backtracking: build schedules step by step
 function backtracking(inputTasks) {
@@ -430,6 +514,23 @@ function runAlgorithm(algorithm) {
       result
     );
   }
+  if (algorithm === "divideConquer") {
+  result = divideAndConquer(bookings);
+
+  showResult(
+    "Divide and Conquer Result",
+    `
+    Divide and conquer first sorts the bookings by end time.
+    It divides the problem into smaller parts and uses binary search to find
+    the latest booking that ends before the current booking starts.
+    It then compares the value of accepting the current booking with rejecting it.
+    Finally, it combines the best results to find the highest total value.
+    `,
+    "O(n log n)",
+    "O(n)",
+    result
+  );
+}
 }
 
 // Show initial message
